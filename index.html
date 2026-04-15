@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adaptive Mock Interview Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-shell">
+          <div class="brand-block">
+            <div class="brand-mark">AI</div>
+            <div>
+              <p class="eyebrow">Interview Intelligence</p>
+              <h1>Adaptive Mock Interview</h1>
+            </div>
+          </div>
+
+          <nav class="nav-links">
+            <button class="nav-link active" data-route="landing">
+              <span class="nav-link-inner">
+                <span class="icon-slot" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="ui-icon"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/></svg>
+                </span>
+                <span>Overview</span>
+              </span>
+            </button>
+            <button class="nav-link" data-route="setup">
+              <span class="nav-link-inner">
+                <span class="icon-slot" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="ui-icon"><path d="M12 3v4"/><path d="M12 17v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/><circle cx="12" cy="12" r="3.5"/></svg>
+                </span>
+                <span>Setup</span>
+              </span>
+            </button>
+            <button class="nav-link" data-route="dashboard">
+              <span class="nav-link-inner">
+                <span class="icon-slot" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="ui-icon"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-7"/></svg>
+                </span>
+                <span>Analytics</span>
+              </span>
+            </button>
+          </nav>
+
+          <section class="sidebar-card compact">
+            <p class="eyebrow">Quick Stats</p>
+            <div id="sidebarStats" class="mini-stat-grid"></div>
+          </section>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="topbar-copy">
+            <p class="eyebrow">Local adaptive simulation</p>
+            <h2 id="viewTitle">Industry-ready interview practice</h2>
+          </div>
+          <div class="topbar-actions">
+            <button id="themeToggleBtn" class="icon-btn secondary-btn" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+            <button id="resumeLastSessionBtn" class="ghost-btn">
+              <span class="btn-inline">
+                <span class="icon-slot" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="ui-icon"><path d="M12 5v7l4 2"/><circle cx="12" cy="12" r="8"/></svg>
+                </span>
+                <span>Resume Insights</span>
+              </span>
+            </button>
+            <button id="clearDataBtn" class="danger-btn">
+              <span class="btn-inline">
+                <span class="icon-slot" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="ui-icon"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 12h10l1-12"/><path d="M9 7V4h6v3"/></svg>
+                </span>
+                <span>Reset Local Data</span>
+              </span>
+            </button>
+          </div>
+        </header>
+
+        <section id="landingView" class="view active">
+          <div class="hero-card">
+            <div class="hero-copy">
+              <p class="eyebrow">Front-end only platform</p>
+              <h3>Simulate technical and HR interviews with adaptive scoring and analytics.</h3>
+              <p>
+                Practice DSA, HR, and System Design rounds with timed questions,
+                instant heuristic evaluation, performance tracking, and
+                personalized suggestions, all running fully in your browser.
+              </p>
+              <div class="hero-actions">
+                <button class="primary-btn" data-route-target="setup">
+                  <span class="btn-inline">
+                    <span class="icon-slot" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="ui-icon"><path d="m8 5 11 7-11 7z"/></svg>
+                    </span>
+                    <span>Start Interview</span>
+                  </span>
+                </button>
+                <button class="secondary-btn" data-route-target="dashboard">
+                  <span class="btn-inline">
+                    <span class="icon-slot" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="ui-icon"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-7"/></svg>
+                    </span>
+                    <span>Open Dashboard</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div class="hero-metrics">
+              <div class="metric-card accent">
+                <span class="metric-label">Adaptive Engine</span>
+                <strong id="landingAdaptiveState">Ready</strong>
+                <small>Difficulty adjusts based on recent performance and timing.</small>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Saved Sessions</span>
+                <strong id="landingSessionCount">0</strong>
+                <small>Every interview result persists through reloads.</small>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Confidence Index</span>
+                <strong id="landingConfidence">0%</strong>
+                <small>Built from score trend, completion quality, and consistency.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h4>Category-aligned practice</h4>
+              <p>Switch between DSA, HR, and System Design with structured difficulties.</p>
+            </article>
+            <article class="feature-card">
+              <h4>Timed evaluation</h4>
+              <p>Each question includes a per-question countdown and time-sensitive scoring.</p>
+            </article>
+            <article class="feature-card">
+              <h4>Persistent insights</h4>
+              <p>Track trends, weak areas, and frequency of attempts with local analytics.</p>
+            </article>
+            <article class="feature-card">
+              <h4>Actionable guidance</h4>
+              <p>Generate focus areas and improvement tips from your session history.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="setupView" class="view">
+          <div class="panel-card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Interview Setup</p>
+                <h3>Configure your next simulation</h3>
+              </div>
+            </div>
+
+            <form id="setupForm" class="setup-grid">
+              <label class="field-card">
+                <span>Category</span>
+                <select id="categorySelect" required>
+                  <option value="DSA">Data Structures & Algorithms</option>
+                  <option value="HR">Human Resources</option>
+                  <option value="System Design">System Design</option>
+                </select>
+              </label>
+
+              <label class="field-card">
+                <span>Starting Difficulty</span>
+                <select id="difficultySelect" required>
+                  <option value="Easy">Easy</option>
+                  <option value="Medium" selected>Medium</option>
+                  <option value="Hard">Hard</option>
+                </select>
+              </label>
+
+              <label class="field-card">
+                <span>Questions per Session</span>
+                <select id="questionCountSelect">
+                  <option value="4">4</option>
+                  <option value="5" selected>5</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                </select>
+              </label>
+
+              <label class="field-card">
+                <span>Timer per Question</span>
+                <select id="timerSelect">
+                  <option value="60">60 seconds</option>
+                  <option value="90" selected>90 seconds</option>
+                  <option value="120">120 seconds</option>
+                </select>
+              </label>
+
+              <button type="submit" class="primary-btn full-width">Launch Interview</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="interviewView" class="view">
+          <div class="interview-layout">
+            <div class="interview-main panel-card">
+              <div class="interview-header">
+                <div>
+                  <p class="eyebrow">Interview Session</p>
+                  <h3 id="sessionHeading">Question 1</h3>
+                </div>
+                <div class="status-pills">
+                  <span id="difficultyBadge" class="pill">Medium</span>
+                  <span id="categoryBadge" class="pill subdued">DSA</span>
+                </div>
+              </div>
+
+              <div class="progress-row">
+                <div class="progress-meta">
+                  <span id="progressLabel">1 / 5 answered</span>
+                  <span id="timerDisplay">01:30</span>
+                </div>
+                <div class="progress-track">
+                  <div id="progressBar" class="progress-bar"></div>
+                </div>
+              </div>
+
+              <article class="question-card">
+                <div class="question-meta">
+                  <span id="questionTypeTag" class="tag">Text</span>
+                </div>
+                <h4 id="questionPrompt"></h4>
+                <p id="questionContext" class="question-context"></p>
+              </article>
+
+              <div id="answerInputRegion" class="answer-region"></div>
+
+              <div class="interview-actions">
+                <button id="skipQuestionBtn" class="ghost-btn" type="button">
+                  <span class="btn-inline">
+                    <span class="icon-slot" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="ui-icon"><path d="m5 5 6 7-6 7"/><path d="M14 5v14"/><path d="m13 12 6-7v14z"/></svg>
+                    </span>
+                    <span>Skip Question</span>
+                  </span>
+                </button>
+                <button id="submitAnswerBtn" class="primary-btn" type="button">
+                  <span class="btn-inline">
+                    <span class="icon-slot" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="ui-icon"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+                    </span>
+                    <span>Submit Answer</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <aside class="interview-sidebar">
+              <section class="panel-card compact">
+                <p class="eyebrow">Live Performance</p>
+                <div id="liveMetrics" class="summary-stack"></div>
+              </section>
+
+              <section class="panel-card compact">
+                <p class="eyebrow">Adaptive Notes</p>
+                <div id="adaptiveNotes" class="summary-stack"></div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section id="resultsView" class="view">
+          <div class="panel-card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Session Results</p>
+                <h3>Your interview evaluation</h3>
+              </div>
+              <button id="retrySessionBtn" class="secondary-btn">
+                <span class="btn-inline">
+                  <span class="icon-slot" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" class="ui-icon"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+                  </span>
+                  <span>Run Similar Session</span>
+                </span>
+              </button>
+            </div>
+
+            <div id="resultsSummary" class="results-grid"></div>
+            <div id="questionBreakdown" class="stack-list"></div>
+          </div>
+        </section>
+
+        <section id="dashboardView" class="view">
+          <div class="dashboard-grid">
+            <section class="panel-card">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Analytics Dashboard</p>
+                  <h3>Performance trends and category insights</h3>
+                </div>
+              </div>
+              <div id="analyticsHighlights" class="analytics-highlight-grid"></div>
+              <div class="chart-grid">
+                <div class="chart-card">
+                  <h4>Average Score by Category</h4>
+                  <p class="chart-caption">See which interview track is strongest across your saved sessions.</p>
+                  <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-card">
+                  <h4>Performance Trend</h4>
+                  <p class="chart-caption">Track score movement over time and spot improvement or decline quickly.</p>
+                  <canvas id="trendChart"></canvas>
+                </div>
+                <div class="chart-card">
+                  <h4>Session Frequency</h4>
+                  <p class="chart-caption">Visualize how regularly you are practicing instead of relying on memory.</p>
+                  <canvas id="frequencyChart"></canvas>
+                </div>
+                <div class="chart-card">
+                  <h4>Confidence Index</h4>
+                  <p class="chart-caption">A reliability score based on quality, consistency, completion, and momentum.</p>
+                  <canvas id="confidenceChart"></canvas>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel-card">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Personalized Suggestions</p>
+                  <h3>Focus areas generated from local history</h3>
+                </div>
+              </div>
+              <div id="suggestionsPanel" class="suggestion-grid"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./js/questionBank.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/interviewEngine.js"></script>
+    <script src="./js/analytics.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
