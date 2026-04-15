@@ -402,6 +402,17 @@ button, select, textarea { font: inherit; }
   -webkit-backdrop-filter: blur(16px) saturate(150%);
 }
 
+.field-card select {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field-card select option,
+.field-card select optgroup {
+  background: #f7f0e6;
+  color: #201a16;
+}
+
 .field-card select, .primary-btn, .secondary-btn, .ghost-btn, .danger-btn { padding: 14px 18px; }
 
 .full-width { grid-column: span 2; min-height: 58px; }
@@ -603,6 +614,12 @@ body.dark-mode .summary-item,
 body.dark-mode .breakdown-card,
 body.dark-mode .suggestion-card {
   background: rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .field-card select option,
+body.dark-mode .field-card select optgroup {
+  background: #f8fafc;
+  color: #111827;
 }
 
 body.dark-mode .suggestion-card.warning {
